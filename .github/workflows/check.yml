@@ -20,4 +20,4 @@ jobs:
         sudo apt install software-properties-common -y
         sudo add-apt-repository --yes --update ppa:ansible/ansible
         sudo apt install ansible
-        ANSIBLE_HOST_KEY_CHECKING=false ansible-playbook -i hosts all.yaml --check
+        ANSIBLE_HOST_KEY_CHECKING=false ansible-playbook -i hosts all.yaml --syntax-check
