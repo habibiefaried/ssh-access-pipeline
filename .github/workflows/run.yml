@@ -16,7 +16,8 @@ jobs:
       run: |
         echo "${{ secrets.ANSIBLE_INVENTORY }}" > hosts
         ls -lah
-    - name: Ansible check
-      uses: tomasnorre/ansible-cli-action@0.0.5
-      with:
-        command: "ansible-playbook -i hosts all.yaml"
+        sudo apt update
+        sudo apt install software-properties-common -y
+        sudo add-apt-repository --yes --update ppa:ansible/ansible
+        sudo apt install ansible
+        ansible-playbook -i hosts all.yaml
