@@ -4,6 +4,7 @@
   vars:
     users: # tambahin user disini
     - "john"
+    - "test1"
   tasks:
   - name: "Create user accounts"
     user:
