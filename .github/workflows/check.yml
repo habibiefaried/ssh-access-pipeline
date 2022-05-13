@@ -8,7 +8,7 @@ jobs:
   ansiblecheck:
     name: Ansible Check
     runs-on: ubuntu-latest
-    environment: production
+    environment: prod
     steps:
     - name: Check out code 
       uses: actions/checkout@v3
