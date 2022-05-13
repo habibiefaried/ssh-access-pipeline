@@ -1,0 +1,22 @@
+name: "Ansible Check"
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  ansiblecheck:
+    name: Ansible Check
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+    - name: Check out code 
+      uses: actions/checkout@v3
+    - name: Run
+      run: |
+        echo "${{ secrets.ANSIBLE_INVENTORY }}" > hosts
+        ls -lah
+    - name: Ansible check
+      uses: tomasnorre/ansible-cli-action@0.0.5
+      with:
+        command: "ansible-playbook -i hosts all.yaml --check"

@@ -1,0 +1,28 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: install python 2
+      raw: test -e /usr/bin/python || (sudo apt -y update && sudo apt install -y python-minimal python-apt)
+
+- hosts: all
+  vars:
+    users: # tambahin user disini
+    - "john"
+  tasks:
+  - name: "Create user accounts"
+    user:
+      name: "{{ item }}"
+      groups: "admin"
+    with_items: "{{ users }}"
+  - name: "Add authorized keys"
+    authorized_key:
+      user: "{{ item }}"
+      key: "{{ lookup('file', 'files/'+ item + '.pub') }}"
+    with_items: "{{ users }}"
+  - name: "Allow admin users to sudo without a password"
+    lineinfile:
+      dest: "/etc/sudoers"
+      state: "present"
+      regexp: "^%admin"
+      line: "%admin ALL=(ALL) NOPASSWD: ALL"
