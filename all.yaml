@@ -5,6 +5,7 @@
     users: # tambahin user disini
     - "john"
     - "test1"
+    - "test44"
   tasks:
   - name: "Create user accounts"
     user:
